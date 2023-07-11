@@ -1,0 +1,30 @@
+.title {
+    font-size: large;
+}
+.selected {
+    background-color: #1a2632;
+}
+.expander {
+    transition: 0.5s;
+}
+.provider {
+    text-align: left;
+    padding: 8px;
+}
+.selected-provider {
+    background-color: #1a2632;
+    border-radius: 8px;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+.logo {
+    height: 40px;
+    width: auto;
+    max-width: 20%;
+    background-color: white;
+}
