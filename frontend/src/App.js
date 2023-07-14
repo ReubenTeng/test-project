@@ -1,16 +1,30 @@
 import "./App.css";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
+import APIInfo from "./APIInfo";
 
 function App() {
+    const [providerInfo, setProviderInfo] = useState({});
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isAPIInfoOpen, setIsAPIInfoOpen] = useState(false);
 
     const handleToggleSidebar = async () => {
         setIsSidebarOpen(true);
     };
 
-    const handleCloseSidebar = () => {
+    const handleCloseSidebar = (data) => {
+        console.log(data);
         setIsSidebarOpen(false);
+        if (data.info) {
+            setProviderInfo(data);
+            console.log(providerInfo);
+            setIsAPIInfoOpen(true);
+        }
+    };
+
+    const handleCloseProviderInfo = () => {
+        console.log("close");
+        setIsAPIInfoOpen(false);
     };
 
     return (
@@ -27,6 +41,11 @@ function App() {
                 ></div>
             )}
             <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
+            <APIInfo
+                isOpen={isAPIInfoOpen}
+                onClose={handleCloseProviderInfo}
+                providerInfo={providerInfo}
+            />
         </div>
     );
 }

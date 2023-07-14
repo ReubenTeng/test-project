@@ -1,0 +1,39 @@
+.open {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #42607b;
+    z-index: 0;
+    color: white;
+    text-align: left;
+    overflow-y: auto;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px;
+    font-size: x-large;
+}
+
+.subtitle {
+    font-size: large;
+    margin-top: 32px;
+}
+
+.contact-type {
+    padding-right: 16px;
+}
+
+.btn-holder {
+    text-align: center;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-bottom: 40px;
+}

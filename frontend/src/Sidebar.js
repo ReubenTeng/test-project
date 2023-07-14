@@ -3,9 +3,8 @@ import { useState, useEffect, createRef } from "react";
 
 const Sidebar = ({ isOpen, onClose }) => {
     const [data, setData] = useState([]);
-    const [providerRefs, setProviderRefs] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(-1);
-    const [providerInfo, setProviderInfo] = useState([]);
+    const [providerInfo, setProviderInfo] = useState();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,15 +31,11 @@ const Sidebar = ({ isOpen, onClose }) => {
             const json = await response.json();
             let apis = Object.keys(json["apis"]);
             let apiInfo = [];
-            let useRefs = [];
             apis.forEach((api) => {
                 console.log(api);
                 apiInfo.push(json["apis"][api]);
-                useRefs.push(createRef());
             });
             setProviderInfo(apiInfo);
-            setProviderRefs(useRefs);
-            console.log(providerInfo);
         } catch (error) {
             console.log(error);
         }
@@ -53,6 +48,12 @@ const Sidebar = ({ isOpen, onClose }) => {
         } else {
             setSelectedIndex(-1);
         }
+    };
+
+    const handleAPIClick = (info) => {
+        console.log(info);
+        // setSelectedAPIIndex(index);
+        onClose(info);
     };
 
     return (
@@ -77,7 +78,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 {data.length > 0
                     ? data.map((item, index) => {
                           return (
-                              <div id={index} ref={providerRefs[index]}>
+                              <div id={index}>
                                   <div
                                       key={index}
                                       className={
@@ -102,7 +103,12 @@ const Sidebar = ({ isOpen, onClose }) => {
                                       {selectedIndex === index
                                           ? providerInfo.map((info, i) => {
                                                 return (
-                                                    <div className="row provider-info">
+                                                    <div
+                                                        className="row provider-info"
+                                                        onClick={() =>
+                                                            handleAPIClick(info)
+                                                        }
+                                                    >
                                                         <img
                                                             className="logo"
                                                             src={
