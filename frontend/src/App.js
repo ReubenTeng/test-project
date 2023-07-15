@@ -4,6 +4,8 @@ import Sidebar from "./Sidebar";
 import APIInfo from "./APIInfo";
 
 function App() {
+    // Functions as the main controller for both the side bar and API info component.
+    // Passes information from the sidebar to the API info component to avoid calling the API guru API multiple times.
     const [providerInfo, setProviderInfo] = useState({});
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isAPIInfoOpen, setIsAPIInfoOpen] = useState(false);
@@ -13,18 +15,19 @@ function App() {
     };
 
     const handleCloseSidebar = (data) => {
-        console.log(data);
+        // When closing the sidebar, if the sidebar was closed by clicking a provider, open the API info component
         setIsSidebarOpen(false);
         if (data.info) {
+            // Sends the provider's information to the API info component if the sidebar was closed by clicking a provider
             setProviderInfo(data);
-            console.log(providerInfo);
             setIsAPIInfoOpen(true);
         }
     };
 
     const handleCloseProviderInfo = () => {
-        console.log("close");
+        // Reopens the sidebar when closing the API info component, with the same provider selected
         setIsAPIInfoOpen(false);
+        setIsSidebarOpen(true);
     };
 
     return (
@@ -35,10 +38,9 @@ function App() {
                 </button>
             </header>
             {isSidebarOpen && (
-                <div
-                    className="blocking-overlay"
-                    onClick={handleCloseSidebar}
-                ></div>
+                <div className="blocking-overlay" onClick={handleCloseSidebar}>
+                    {/* This div blocks everything apart from the sidebar when the sidebar is active */}
+                </div>
             )}
             <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
             <APIInfo

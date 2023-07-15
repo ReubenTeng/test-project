@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./APIInfo.css";
 
 const APIInfo = ({ isOpen, onClose, providerInfo }) => {
@@ -6,18 +5,21 @@ const APIInfo = ({ isOpen, onClose, providerInfo }) => {
         <div className={isOpen ? "open" : "close"}>
             <div
                 style={{
-                    margin: "24px 60px",
+                    margin: "0px 60px",
+                    position: "relative",
+                    minHeight: "100%",
                 }}
             >
                 <div className="title">
                     <img
                         src={providerInfo["info"]["x-logo"]["url"]}
                         style={{
-                            maxHeight: "80px",
-                            maxWidth: "80px",
-                            hegiht: "80px",
+                            maxHeight: "100px",
+                            maxWidth: "100px",
+                            hegiht: "100px",
                             margin: "8px",
                         }}
+                        alt=""
                     ></img>
                     <div style={{ margin: "8px" }}>
                         {providerInfo["info"]["title"]}
@@ -64,6 +66,9 @@ const APIInfo = ({ isOpen, onClose, providerInfo }) => {
                         )}
                     </div>
                 )}
+                <div style={{ paddingBottom: "80px" }}>
+                    {/* This serves as padding to force the button to appear below when the content of the page is very large */}
+                </div>
                 <div className="btn-holder">
                     <button
                         className="bluebutton bottom-button"

@@ -1,5 +1,6 @@
-.title {
+.header {
     font-size: large;
+    margin: 16px;
 }
 .selected {
     background-color: #1a2632;
@@ -19,12 +20,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
+    margin: 8px;
     cursor: pointer;
+    height: 40px;
 }
 .logo {
     height: 40px;
     width: auto;
     max-width: 20%;
-    background-color: white;
+    font-size: small;
 }

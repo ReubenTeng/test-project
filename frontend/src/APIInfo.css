@@ -10,13 +10,13 @@
     color: white;
     text-align: left;
     overflow-y: auto;
+    margin-top: 24px;
 }
 
 .title {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 24px;
     font-size: x-large;
 }
 
@@ -31,9 +31,8 @@
 
 .btn-holder {
     text-align: center;
-    bottom: 0;
+    bottom: 48px;
     position: absolute;
     left: 0;
     right: 0;
-    margin-bottom: 40px;
 }
