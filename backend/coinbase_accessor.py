@@ -2,6 +2,13 @@ import requests as re
 import psycopg2 as pg
 import time
 
+NAME: str = "TABLE NAME"
+USER: str = "USERNAME"
+PASSWORD: str = "PASSWORD"
+# HOST: str = "host.docker.internal" # USE THIS FOR DOCKER
+HOST: str = "HOST"  # USE THIS FOR LOCAL
+PORT: str = "PORT"
+
 FIAT = ["USD", "SGD", "EUR"]
 CRYPTO = ["BTC", "ETH", "DOGE"]
 
@@ -25,19 +32,19 @@ def get_coinbase_data(curr_type: str, connection=None):
     return rates
 
 
-def get_curr(curr: str, base, connection=None):
+def get_curr(curr: str, base: str, connection=None):
     """Gets the most recent conversion rates for a given currency.
 
     Args:
         curr (str): currency to convert from
-        base (_type_): base (either fiat or crypto) of the given currency
-        connection (_type_, optional): If given, uses psql server. Else, takes from coinbase API. Defaults to None.
+        base (str): base (either fiat or crypto) of the given currency
+        connection (optional): If given, uses psql server. Else, takes from coinbase API. Defaults to None.
 
     Raises:
-        ValueError: _description_
+        ValueError: If base is not either 'fiat' or 'crypto'
 
     Returns:
-        _type_: _description_
+        dict: A dictionary containing the conversion rates for the given currency base type
     """
     if base != "fiat" and base != "crypto":
         raise ValueError("curr_type must be either 'fiat' or 'crypto'")
@@ -70,6 +77,11 @@ def get_curr(curr: str, base, connection=None):
 
 
 def connect_to_database():
+    """Connects to currency conversion database
+
+    Returns:
+        Connection to the database
+    """
     # DB schema:
     # the primary key is (from_curr, to_curr, timestamp)
     # from_curr: the currency to convert from
@@ -77,11 +89,6 @@ def connect_to_database():
     # rate: the conversion rate from from_curr to to_curr
     # timestamp: the time the rate was last updated
 
-    NAME: str = "curr_exchange"
-    USER: str = "USERNAME"
-    PASSWORD: str = "PASSWORD"
-    HOST: str = "HOST"
-    PORT: str = "PORT"
     connection = pg.connect(
         database=NAME, user=USER, password=PASSWORD, host=HOST, port=PORT
     )
